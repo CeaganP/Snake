@@ -7,12 +7,9 @@ package snake;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -56,7 +53,8 @@ public class Launcher extends Application{
     }
     
     private void animate(GraphicsContext gc){
-        while (snake.getState()){
+        
+        while (snake.getState()){        
             gc.setFill(Color.BLACK);
             gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
             snake.draw(gc);

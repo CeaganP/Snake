@@ -21,6 +21,11 @@ public class Snake {
     
     private double foodX = -50, foodY = -50;//created off screen
     
+    /**
+     * Primary constructor, no override methods available. 
+     * @param maxX the maximum width
+     * @param maxY the maximum height
+     */
     public Snake(double maxX, double maxY){
         x = maxX;
         y = maxY;
@@ -90,19 +95,39 @@ public class Snake {
      * used to check when collision occurs with the wall and with the food. Also handles the addition of size
      */
     private void checkConstraints(){
-        if (head[0] > x - step){
+        if (head[0] > x - step){ //greater than right wall
             head[0] = 0;
         }
-        if (head[0] < 0){
+        if (head[0] < 0){ //lesser than left wall
             head[0] = x - step;
         }
-        if (head[1] > y - step){
+        if (head[1] > y - step){ //greater than bottom wall
             head[1] = 0;
         }
         if (head[1] < 0){
-            head[1] = y - step;
+            head[1] = y - step; //lesser than top wall
         }
-               
+        
+        for (int i = bodyLength - 1; i > 0; i--){
+                body[i][0] = body[i - 1][0];
+                body[i][1] = body[i - 1][1];
+            }
+        body[0][0] = head[0];
+        body[0][1] = head[1];
+
+        head[0] += stepX;
+        head[1] += stepY;
+        
+        for (double ix = head[0]; ix <= head[0] + bodySize; ix++){
+            for (double iy = head[1]; iy <= head[1] + bodySize; iy++){
+                for (int i = bodyLength - 1; i > 0; i--){
+                    if (body[i][0] == ix && body[i][1] == iy){
+                        stop();
+                    }
+                }
+            }
+        }    
+        
         //for the top right of the head to the bottom right if any pixel matches that of the food it will trigger the statements within
         for (double ix = head[0]; ix <= head[0] + bodySize; ix++){
             for (double iy = head[1]; iy <= head[1] + bodySize; iy++){
@@ -185,6 +210,11 @@ public class Snake {
             Thread.sleep(duration);
         } catch (InterruptedException ex) {
         }
+    }
+    
+    public void stop() {         
+        System.out.println("Snake closed");
+        System.exit(0);
     }
 }
 
