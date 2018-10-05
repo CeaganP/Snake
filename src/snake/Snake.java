@@ -73,11 +73,9 @@ public class Snake {
                         //ADD A FUNCTION TO EASILY RESTART THE APPLICATION
                         break;
                     case "ESCAPE":
-                        System.exit(1);
                         state = false;
                         break;
                     case "X":
-                        System.exit(1);
                         state = false;
                         break;
                     default:
