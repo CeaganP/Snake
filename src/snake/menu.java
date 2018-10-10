@@ -62,29 +62,15 @@ public class menu extends Application{
         
         //declaring the drawing surface
         GraphicsContext gc = canvas.getGraphicsContext2D();
-                
-        //this thread handles the primary drawing of the menu
-        Thread t = new Thread(() -> draw(gc));        
-        t.start();
     }
-    
-    private void draw(GraphicsContext gc){
-    
-    }
-    
+ 
     private void buttonClicked(ActionEvent e){
         Platform.runLater(() -> {
             try {
                 new Launcher().start(new Stage());
                 toggleVisibility();
             } catch (Exception ex) {
-                Dialog alert = new Dialog();
-                alert.setHeaderText("ALERT");
-                alert.setContentText("Error Launching Snake");
-                alert.show();
-                alert.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
-                Node closeButton = alert.getDialogPane().lookupButton(ButtonType.CLOSE);
-                closeButton.setVisible(false);
+                Alert alert = new Alert("Alert", "Error launching Snake");
             }
         });
         
@@ -98,7 +84,6 @@ public class menu extends Application{
         } else if (stage.isShowing() == true) {
             stage.hide();
         }        
-        
     }
 
     /**

@@ -46,9 +46,9 @@ public class Launcher extends Application{
         
         GraphicsContext gc = canvas.getGraphicsContext2D();
                 
-        Thread t = new Thread(() -> animate(gc));
-        Thread move = new Thread(()->snake.move(gc));        
-        t.start();
+        Thread animate = new Thread(() -> animate(gc));
+        Thread move = new Thread(()->snake.checkInput(gc));        
+        animate.start();
         move.start();
     }
     
@@ -77,7 +77,7 @@ public class Launcher extends Application{
     //ends program run duration. Kills all tasks
     @Override
     public void stop() {         
-        System.out.println("Snake closed");
+        System.out.println("Launcher closed");
         System.exit(0);
     }
     
